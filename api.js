@@ -9,7 +9,15 @@ var router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+    cors({
+        credentials: true,
+        origin: [
+            'http://localhost:8088',
+            'https://storiesforus.herokuapp.com/'
+        ]
+    }),
+)
 app.use('/api', router);
 
 router.use((request,response,next) => {
@@ -17,14 +25,19 @@ router.use((request,response,next) => {
     next();
 })
 
+app.get('/', function (req, res) {
+  res.send('Hello World!')
+})
+
 router.route('/stories').get((request,response) => {
 
     dboperations.getStories().then(result => {
-//    console.log(result);
+
         response.json(result[0]);
 })
 
 })
+
 
 var port = process.env.PORT || 8088;
 app.listen(port);

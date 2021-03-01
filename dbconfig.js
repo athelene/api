@@ -4,7 +4,8 @@ const config = {
     server: 'storiesforus.database.windows.net',
     database: 'storiesforusdev',
     options: {
-        Encrypt: true
+        Encrypt: true,
+        enableArithPort: true
     },
     port: 1433
 }
