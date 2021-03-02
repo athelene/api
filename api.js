@@ -10,13 +10,7 @@ var router = express.Router();
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 app.use(
-    cors({
-        credentials: true,
-        origin: [
-            'http://localhost:8088',
-            'https://storiesforus.herokuapp.com/'
-        ]
-    }),
+    cors(),
 )
 app.use('/api', router);
 
