@@ -5,12 +5,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var app = express();
+app.use(cors());
 var router = express.Router();
 
-const configurationOptions = {
-    methods: ['GET'],
-    origin: 'localhost:8080'
-}
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
@@ -22,7 +19,7 @@ router.use((request,response,next) => {
     next();
 })
 
-app.get('/', cors(configurationOptions), function (req, res) {
+app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
