@@ -7,11 +7,14 @@ var cors = require('cors');
 var app = express();
 var router = express.Router();
 
+const configurationOptions = {
+    methods: 'GET',
+    origin: 'localhost:8080'
+}
+
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-app.use(
-    cors(),
-)
+
 app.use('/api', router);
 
 router.use((request,response,next) => {
@@ -19,7 +22,7 @@ router.use((request,response,next) => {
     next();
 })
 
-app.get('/', function (req, res) {
+app.get('/', cors(configurationOptions), function (req, res) {
   res.send('Hello World!')
 })
 
