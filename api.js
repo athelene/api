@@ -8,7 +8,7 @@ var app = express();
 var router = express.Router();
 
 const configurationOptions = {
-    methods: 'GET',
+    methods: ['GET'],
     origin: 'localhost:8080'
 }
 
