@@ -4,6 +4,7 @@ const dboperations = require('./dboperations');
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+const { response } = require('express');
 var app = express();
 
 app.all('*', function(req, res, next) {
@@ -31,17 +32,25 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-router.route('/stories').get((request,response) => {
-
-    dboperations.getStories().then(result => {
-
-        response.json(result[0]);
+app.get('/stories', function (req, res) {
+    console.log('about to start dboperations')
+      dboperations.getStories().then(result => {
+        const list = result[0];
+        console.log('result from azure is:', list);
+       res.send(list) 
+})  
 })
 
+app.get('/todaysqc', function (req, res) {
+    console.log('about to start dboperations')
+      dboperations.getTodaysQC().then(result => {
+        const list = result[0];
+        console.log('todays qc is:', list);
+       res.send(list) 
+})  
 })
 
-
-var port = process.env.PORT || 8088;
+var port = process.env.PORT || 8700;
 app.listen(port);
 console.log('Story API is running at ' + port);
 
